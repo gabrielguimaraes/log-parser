@@ -1,4 +1,4 @@
-package wallethub.gabrielguimaraes.arguments;
+package br.com.gabrielguimaraes.log.parser.arguments;
 
 import java.util.stream.Stream;
 

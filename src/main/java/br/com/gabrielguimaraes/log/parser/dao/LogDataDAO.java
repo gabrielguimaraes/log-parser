@@ -1,4 +1,4 @@
-package wallethub.gabrielguimaraes.dao;
+package br.com.gabrielguimaraes.log.parser.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,8 +12,8 @@ import java.util.TimeZone;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import wallethub.gabrielguimaraes.database.MySQLDatabaseAccess;
-import wallethub.gabrielguimaraes.model.LogData;
+import br.com.gabrielguimaraes.log.parser.database.MySQLDatabaseAccess;
+import br.com.gabrielguimaraes.log.parser.model.LogData;
 
 public class LogDataDAO implements BasicDAO<LogData>{
 	
@@ -28,7 +28,6 @@ public class LogDataDAO implements BasicDAO<LogData>{
 		
 		return getObjectsFromResultSet(resultSet);
 	}
-	
 	
 	public Integer save(LogData logData) {
 	    String sqlFields = EntityMappingHelper.getSingleEntityValuesTerms(LogData.class, logData);

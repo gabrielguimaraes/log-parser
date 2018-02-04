@@ -1,9 +1,9 @@
-package wallethub.gabrielguimaraes.model;
+package br.com.gabrielguimaraes.log.parser.model;
 
 import java.time.LocalDateTime;
 
-import wallethub.gabrielguimaraes.database.Column;
-import wallethub.gabrielguimaraes.database.Id;
+import br.com.gabrielguimaraes.log.parser.database.Column;
+import br.com.gabrielguimaraes.log.parser.database.Id;
 
 public class LogData {
     

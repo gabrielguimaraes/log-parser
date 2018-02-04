@@ -1,4 +1,4 @@
-package wallethub.gabrielguimaraes.database;
+package br.com.gabrielguimaraes.log.parser.database;
 
 import java.math.BigDecimal;
 import java.sql.Connection;
@@ -24,21 +24,20 @@ public class MySQLDatabaseAccess {
     private Connection databaseConnection;
 
     public Connection connectToDatabase() {
-        System.out.println("Connecting to mysql database for Log Reader");
+//        System.out.println("Connecting to mysql database for Log Reader");
         try {
             Class.forName("com.mysql.jdbc.Driver");
-
+            
             this.databaseConnection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-            System.out.println("Database connected");
-
+//            System.out.println("Database connected");
+            
             return this.databaseConnection;
-
-        } catch (SQLException e) {
-            throw new IllegalStateException("Cannot connect to the database", e);
+            
         } catch (ClassNotFoundException e) {
             throw new IllegalStateException("Cannot find mysql jdbc driver", e);
+        } catch (SQLException e) {
+            throw new IllegalStateException("Cannot connect to the database", e);
         }
-
     }
 
     public void close() {
@@ -226,7 +225,7 @@ public class MySQLDatabaseAccess {
             parametersGroup.forEach(list -> addBatchStatement(preparedStatement, list));
             int[] executeBatchResult = preparedStatement.executeBatch();
             this.databaseConnection.commit();
-            System.out.println("INSERTED " + parametersGroup.size());
+//            System.out.println("INSERTED " + parametersGroup.size());
             return IntStream
                 .of(executeBatchResult)
                 .boxed()

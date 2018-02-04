@@ -1,4 +1,4 @@
-package wallethub.gabrielguimaraes.dao;
+package br.com.gabrielguimaraes.log.parser.dao;
 
 import java.sql.ResultSet;
 import java.util.List;

@@ -1,9 +1,8 @@
-package wallethub.gabrielguimaraes.database;
+package br.com.gabrielguimaraes.log.parser.database;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Column {
-    String value() default "";
+public @interface Id {
 }

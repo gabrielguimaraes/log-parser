@@ -1,4 +1,4 @@
-package wallethub.gabrielguimaraes.dao;
+package br.com.gabrielguimaraes.log.parser.dao;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -9,8 +9,8 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import wallethub.gabrielguimaraes.database.Column;
-import wallethub.gabrielguimaraes.database.Id;
+import br.com.gabrielguimaraes.log.parser.database.Column;
+import br.com.gabrielguimaraes.log.parser.database.Id;
 
 public class EntityMappingHelper {
     public static Map<Class<?>, Object> addObjectToMap(Field field, Object object) {
