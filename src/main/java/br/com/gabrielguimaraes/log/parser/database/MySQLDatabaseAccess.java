@@ -190,7 +190,7 @@ public class MySQLDatabaseAccess {
             
             List<List<List<Map<Class<?>, Object>>>> groupOfLists = IntStream
                 .iterate(begin, i -> i + increment)
-                .limit(end / increment + 1)
+                .limit((end / increment) + 1)
                 .mapToObj(i -> batchParameters.subList(i, isEndOfListIndex(i, end, increment)))
                 .collect(Collectors.toList());
             
@@ -213,9 +213,9 @@ public class MySQLDatabaseAccess {
     }
 
     private int isEndOfListIndex(int i, int end, int increment) {
-        int endSublist = i+increment;
+        int endSublist = i + increment;
         if (endSublist > end) {
-            endSublist = end;
+            endSublist = end + 1;
         }
         return endSublist;
     }

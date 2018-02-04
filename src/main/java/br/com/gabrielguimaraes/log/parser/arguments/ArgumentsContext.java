@@ -34,6 +34,8 @@ public class ArgumentsContext {
         return FieldConversionHelper.addTimeAccordingToDurationArgument(argumentsParser.getStartDate(), argumentsParser.getDuration());
     }
     
+    
+    
     public LocalDateTime getStartDate() {
         return startDate;
     }
@@ -65,6 +67,18 @@ public class ArgumentsContext {
             .collect(Collectors.toList());
 
         return listObject;
+    }
+
+    public String createReason(String additionalInformation) {
+        return new StringBuilder("IP Blocked because reached threshold limit of ")
+            .append(getThreshold())
+            .append(" requisitions from ")
+            .append(getStartDate())
+            .append(" to ")
+            .append(getEndDate())
+            .append(". ")
+            .append(additionalInformation)
+            .toString();
     }
 
     @Override
@@ -108,4 +122,5 @@ public class ArgumentsContext {
     public String toString() {
         return "ArgumentsContext [startDate=" + startDate + ", endDate=" + endDate + ", threshold=" + threshold + "]";
     }
+
 }

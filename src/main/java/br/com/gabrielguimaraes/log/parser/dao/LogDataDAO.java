@@ -4,25 +4,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.Instant;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
-import br.com.gabrielguimaraes.log.parser.database.MySQLDatabaseAccess;
 import br.com.gabrielguimaraes.log.parser.model.LogData;
 
-public class LogDataDAO implements BasicDAO<LogData>{
+public class LogDataDAO extends BasicDAO<LogData>{
 	
-    private MySQLDatabaseAccess database;
-    
-    public LogDataDAO() {
-        this.database = new MySQLDatabaseAccess();
-    }
-    
 	public List<LogData> findAll() {
 		ResultSet resultSet = database.selectQuery("SELECT * FROM log_data", null);
 		
@@ -57,36 +48,6 @@ public class LogDataDAO implements BasicDAO<LogData>{
 	    return this.database.saveBatch(queryBuilder.toString(), logDataMappedList);
     }
 	
-
-	
-	@Override
-	public List<Map<Class<?>, Object>> parseToListOfMappedValues(LogData logData) {
-	    List<Map<Class<?>, Object>> listObject = Stream.of(LogData.class.getDeclaredFields())
-	        .map(f -> EntityMappingHelper.addObjectToMap(f, logData))
-	        .filter(m -> m != null && !m.isEmpty())
-            .collect(Collectors.toList());
-
-	    return listObject;
-	}
-	
-	
-	@Override
-    public List<LogData> getObjectsFromResultSet(ResultSet resultSet) {
-        List<LogData> logDataList = new ArrayList<>();
-        try {
-            while(resultSet.next()) {
-                logDataList.add(fillData(resultSet));
-            }
-        } catch (SQLException e) {
-            throw new IllegalStateException("Cannot get next ResultSet", e);
-        } finally {
-            this.database.close();
-        }
-        
-        
-        return logDataList;
-    }
-
 	@Override
     public LogData fillData(ResultSet resultSet) {
         LogData logData = new LogData();
