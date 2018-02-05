@@ -46,7 +46,7 @@
 1. To run the application, you should run the below instruction, like asked by the file _Java_MySQL_Test_Instructions.txt_
 
     ```
-    java -cp "log-parser-1.0-SNAPSHOT-jar-with-dependencies.jar" br.com.gabrielguimaraes.log.parser.LogParserApp --accesslog=access.log --startDate=2017-01-01.00:00:00 --duration=daily --threshold=500
+    java -cp "log-parser-1.0-SNAPSHOT.jar" br.com.gabrielguimaraes.log.parser.LogParserApp --accesslog=access.log --startDate=2017-01-01.00:00:00 --duration=daily --threshold=500
     ```
     > This command will load all the _access.log_ file into the **MySQL** database and also will do the query to the database according to the _startDate_, _duration_ and _threshold_ parameters.
 
@@ -59,7 +59,7 @@
 ---
 1. Java program that can be run from command line
     ```
-    java -cp "log-parser-1.0-SNAPSHOT-jar-with-dependencies.jar" br.com.gabrielguimaraes.log.parser.LogParserApp --accesslog=access.log --startDate=2017-01-01.00:00:00 --duration=daily --threshold=500
+    java -cp "log-parser-1.0-SNAPSHOT.jar" br.com.gabrielguimaraes.log.parser.LogParserApp --accesslog=access.log --startDate=2017-01-01.00:00:00 --duration=daily --threshold=500
     ```
 
     > If you just want to run the _blocked ip's query_, you should omit the parameter  _--accesslog_ and its value.
