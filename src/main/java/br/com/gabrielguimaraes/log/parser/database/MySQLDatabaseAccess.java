@@ -17,19 +17,35 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class MySQLDatabaseAccess {
-    public static final String URL = "jdbc:mysql://localhost:3306/log_reader?useSSL=false";
-    public static final String USERNAME = "root";
-    public static final String PASSWORD = "mysql";
+    private static final String USE_SSL_FALSE = "?useSSL=false";
+    private final String url;
+    private final String database;
+    private final String host;
+    private final String username;
+    private final String password;
 
     private Connection databaseConnection;
+    
+    public MySQLDatabaseAccess() {
+        this.username = "root";
+        this.password = "mysql";
+        this.database = "log_reader";
+        this.host = "jdbc:mysql://localhost:3306/";
+        this.url = this.host + this.database + USE_SSL_FALSE;
+    }
+    public MySQLDatabaseAccess(final String username, final String password, final String database, final String host) {
+        this.username = username;
+        this.password = password;
+        this.database = database;
+        this.host = host + "/";
+        this.url = this.host + this.database + USE_SSL_FALSE;
+    }
 
     public Connection connectToDatabase() {
-//        System.out.println("Connecting to mysql database for Log Reader");
         try {
             Class.forName("com.mysql.jdbc.Driver");
             
-            this.databaseConnection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-//            System.out.println("Database connected");
+            this.databaseConnection = DriverManager.getConnection(url, username, password);
             
             return this.databaseConnection;
             

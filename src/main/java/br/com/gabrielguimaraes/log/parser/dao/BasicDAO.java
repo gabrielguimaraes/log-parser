@@ -15,9 +15,23 @@ public abstract class BasicDAO<T> {
     protected MySQLDatabaseAccess database;
     
     public BasicDAO() {
-        this.database = new MySQLDatabaseAccess();
+        if (checkIfApplicationPropertiesAreSet()) {
+            this.database = new MySQLDatabaseAccess(System.getProperty("db-username"), System.getProperty("db-password")
+                   , System.getProperty("db-database"), System.getProperty("db-host"));
+        } else {
+            this.database = new MySQLDatabaseAccess();
+        }
     }
     
+    private Boolean checkIfApplicationPropertiesAreSet() {
+        if (System.getProperty("db-username") != null && System.getProperty("db-password") != null
+                && System.getProperty("db-database") != null && System.getProperty("db-host") != null) {
+            return Boolean.TRUE;
+        }
+        
+        return Boolean.FALSE;
+    }
+
     abstract T fillData(ResultSet resultSet);
 
     List<T> getObjectsFromResultSet(ResultSet resultSet) {

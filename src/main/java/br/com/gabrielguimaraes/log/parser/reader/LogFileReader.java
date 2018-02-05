@@ -28,9 +28,9 @@ public class LogFileReader {
             return Stream.empty();
         }
         
-        Stream<String> fileLines = Stream.empty();;
+        Stream<String> fileLines = Stream.empty();
         try {
-//            Path path = Paths.get(getClass().getClassLoader().getResource(logFileName).toURI());
+//          Path path = Paths.get(getClass().getClassLoader().getResource(logFileName).toURI());
             Path path = Paths.get(logFileName).toAbsolutePath();
             fileLines = Files.lines(path);
 //        } catch (URISyntaxException e) {

@@ -11,22 +11,29 @@ import br.com.gabrielguimaraes.log.parser.dao.IpCountDAO;
 import br.com.gabrielguimaraes.log.parser.dao.LogDataDAO;
 import br.com.gabrielguimaraes.log.parser.model.IpCount;
 import br.com.gabrielguimaraes.log.parser.model.LogData;
+import br.com.gabrielguimaraes.log.parser.reader.ApplicationPropertiesReader;
 import br.com.gabrielguimaraes.log.parser.reader.LogFileReader;
 
 public class LogParserApp {
     public static void main(String[] args) {
+        readApplicationProperties();
+        
         ArgumentsParser argumentsParser = new ArgumentsParser(args);
 
         Stream<String> data = LogFileReader.readLogFileLines(argumentsParser.getAccesslog());
 
         ArgumentsContext argumentsContext = ArgumentsContext.fromArgumentsParser(argumentsParser);
 
-        readFromFile(data);
+        saveInformationFromFileInput(data);
         
         List<IpCount> ipCountList = findBlockedIpsByArguments(argumentsContext);
         
         IpBlockedDAO ipBlockedDAO = new IpBlockedDAO();
         ipBlockedDAO.saveIpBlockedFromIpCountArguments(ipCountList, argumentsContext);
+    }
+
+    private static void readApplicationProperties() {
+        ApplicationPropertiesReader applicationPropertiesReader = new ApplicationPropertiesReader();
     }
 
     private static List<IpCount> findBlockedIpsByArguments(ArgumentsContext argumentsContext) {
@@ -36,7 +43,7 @@ public class LogParserApp {
         return ipCountList;
     }
 
-    private static void readFromFile(Stream<String> data) {
+    private static void saveInformationFromFileInput(Stream<String> data) {
         List<LogData> logDataList = data.map(LogFileReader::parseFromLogLine).collect(Collectors.toList());
         
         LogDataDAO logDataDAO = new LogDataDAO();
