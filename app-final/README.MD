@@ -37,8 +37,6 @@
 
 ## Running the application
 
-1. You can find the **.jar** file and all needed files and instructions inside the folder [App Final](app-final).
-
 1. The log file named _access.log_ contains the example file to execute this test.
 
 1. You should have java jdk 8, if not, please install it.
